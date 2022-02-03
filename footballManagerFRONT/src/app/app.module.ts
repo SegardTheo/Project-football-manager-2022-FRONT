@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {Injectable, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListPlayersComponent } from './list-players/list-players.component';
+import { CommonModule } from '@angular/common';
+import { BrowserModule} from "@angular/platform-browser";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -12,10 +12,10 @@ import { ListPlayersComponent } from './list-players/list-players.component';
     ListPlayersComponent
   ],
   imports: [
+    HttpClientModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

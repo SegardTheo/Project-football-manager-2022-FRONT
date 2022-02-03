@@ -1,20 +1,23 @@
-import {Component, Injectable, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+const baseUrl = 'http://football-manager/movies';
+//const baseUrl = 'http://football-manager/api/players?page=1';
 
 export interface PlayersListResponse {
-  totalItems: number;
   items: Array<{
     player: {
-      nom: string;
+      name: string;
     }
   }>;
 }
 
 export class Player {
-  nom: string | undefined;
+  name: string | undefined;
 
-  constructor(nom: string | undefined) {
-    this.nom = nom;
+  constructor(name: string | undefined) {
+    this.name = name;
   }
 }
 
@@ -22,18 +25,37 @@ export class Player {
   providedIn: 'root'
 })
 export class PlayerService {
-  bookCount: number | undefined;
-  playerList: Player[] | undefined;
+  playerList : Player[] | undefined;
 
-  private _bookListUrl = 'http://localhost::8000/playersList';
+  constructor(private http: HttpClient) { }
 
-  constructor(private _httpClient: HttpClient) {
+  getAll(): Player[] | undefined {
+    this.http.get<Player[]>(baseUrl)
+      .subscribe(data => {
+        this.playerList = data;
+        console.log(this.playerList);
+      });
+
+    return this.playerList;
   }
 
-  ngOnInit() {
-    this._httpClient.get<PlayersListResponse>(this._bookListUrl)
-        .subscribe(playersListResponse => {
-          this.playerList = playersListResponse.items.map(item => new Player(item.player.nom));
-        });
+  create(data: any): Observable<any> {
+    return this.http.post(baseUrl, data);
+  }
+
+  update(id: any, data: any): Observable<any> {
+    return this.http.put(`${baseUrl}/${id}`, data);
+  }
+
+  delete(id: any): Observable<any> {
+    return this.http.delete(`${baseUrl}/${id}`);
+  }
+
+  deleteAll(): Observable<any> {
+    return this.http.delete(baseUrl);
+  }
+
+  findByTitle(title: any): Observable<PlayersListResponse[]> {
+    return this.http.get<PlayersListResponse[]>(`${baseUrl}?title=${title}`);
   }
 }
