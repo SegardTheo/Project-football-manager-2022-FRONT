@@ -1,5 +1,26 @@
-<p>list-players works!</p>
-
-<div class="cart-item" *ngFor="let item of players">
-  <span>{{ item.name }}</span>
-</div>
+<mat-card style="background: #d6eff4;">
+    <div style="display: flex;justify-content: space-between;">
+        <mat-card-subtitle>world cup</mat-card-subtitle>
+        <a href="/playerForm">
+            <mat-icon mat-list-icon>add_circle</mat-icon></a>
+    </div>
+    <mat-card-title>Liste des joueurs</mat-card-title>
+    <mat-card-content>
+        <mat-list role="list" *ngFor="let player of players">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <a href="/playerDetails?id={{player.id}}">
+                    <mat-list-item role="listitem">
+                        <mat-icon mat-list-icon>account_box</mat-icon>
+                        <div mat-line>{{player.name}}</div>
+                    </mat-list-item>
+                </a>
+                <a href="/playerForm?id={{player.id}}">modifier</a>
+            </div>
+        </mat-list>
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+    </mat-card-actions>
+</mat-card>

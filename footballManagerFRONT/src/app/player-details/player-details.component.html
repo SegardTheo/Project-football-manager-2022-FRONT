@@ -1,0 +1,54 @@
+<mat-card>
+    <mat-card-subtitle>world cup</mat-card-subtitle>
+    <mat-card-title>Détails du joueur : {{ player?.name }}</mat-card-title>
+    <mat-card-content>
+        <mat-list-item role="listitem">
+            <div style="display: flex">
+                <mat-icon mat-list-icon>account_box</mat-icon>
+                <div mat-line>Id : {{player?.id}}</div>
+            </div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <div style="display: flex">
+                <mat-icon mat-list-icon>account_box</mat-icon>
+                <div mat-line>Description : {{player?.description}}</div>
+            </div>
+        </mat-list-item>
+    </mat-card-content>
+
+    <mat-divider inset></mat-divider>
+
+    <mat-card-content *ngIf="stats">
+        <mat-card-title>Stats</mat-card-title>
+        <mat-list-item role="listitem">
+            <div style="display: flex">
+                <mat-icon mat-list-icon>account_box</mat-icon>
+                <div mat-line>Id : {{stats?.id}}</div>
+            </div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <div style="display: flex">
+                <mat-icon mat-list-icon>account_box</mat-icon>
+                <div mat-line>Condition physique : {{stats?.physicalCondition}}</div>
+            </div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <div style="display: flex">
+                <mat-icon mat-list-icon>account_box</mat-icon>
+                <div mat-line>Force de frappe : {{stats?.strength}}</div>
+            </div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <div style="display: flex">
+                <mat-icon mat-list-icon>account_box</mat-icon>
+                <div mat-line>Defense : {{stats?.defense}}</div>
+            </div>
+        </mat-list-item>
+    </mat-card-content>
+
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+    </mat-card-actions>
+</mat-card>
