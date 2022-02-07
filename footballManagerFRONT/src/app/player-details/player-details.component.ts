@@ -25,15 +25,8 @@ export class PlayerDetailsComponent implements OnInit {
 
     // @ts-ignore
     this.playerService.findById(this.idPlayer).subscribe((data)=>{
+      console.log(data);
       this.player = data;
-
-      if(this.player?.stats != null)
-      {
-        // @ts-ignore
-        this.statsService.findByUrl(this.player?.stats).subscribe((data)=>{
-          this.stats = data;
-        });
-      }
     });
   }
 }

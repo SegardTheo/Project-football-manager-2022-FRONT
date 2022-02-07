@@ -309,7 +309,6 @@
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-menu is-active buttons">
           <button class="button is-link" [routerLink]="['']">Accueil</button>
-          <button class="button is-link" [routerLink]="['/playersList']">Joueurs</button>
         </div>
       </nav>
     </div>
@@ -319,6 +318,10 @@
 <div class="content" role="main">
 
   <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <div style="display: flex;">
+      <app-list-players></app-list-players>
+      <app-list-teams></app-list-teams>
+    </div>
     <router-outlet style="width: 100%;"></router-outlet>
   </div>
   <!-- Footer -->

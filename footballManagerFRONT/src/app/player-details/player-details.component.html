@@ -15,33 +15,44 @@
             </div>
         </mat-list-item>
     </mat-card-content>
-
     <mat-divider inset></mat-divider>
 
-    <mat-card-content *ngIf="stats">
+    <mat-card-content>
         <mat-card-title>Stats</mat-card-title>
         <mat-list-item role="listitem">
             <div style="display: flex">
                 <mat-icon mat-list-icon>account_box</mat-icon>
-                <div mat-line>Id : {{stats?.id}}</div>
+                <div mat-line>Condition physique : {{player?.physicalCondition}}</div>
             </div>
         </mat-list-item>
         <mat-list-item role="listitem">
             <div style="display: flex">
                 <mat-icon mat-list-icon>account_box</mat-icon>
-                <div mat-line>Condition physique : {{stats?.physicalCondition}}</div>
+                <div mat-line>Force de frappe : {{player?.strength}}</div>
             </div>
         </mat-list-item>
         <mat-list-item role="listitem">
             <div style="display: flex">
                 <mat-icon mat-list-icon>account_box</mat-icon>
-                <div mat-line>Force de frappe : {{stats?.strength}}</div>
+                <div mat-line>Defense : {{player?.defense}}</div>
+            </div>
+        </mat-list-item>
+    </mat-card-content>
+
+    <mat-divider inset></mat-divider>
+
+    <mat-card-content *ngIf="player?.team">
+        <mat-card-title>Equipe</mat-card-title>
+        <mat-list-item role="listitem">
+            <div style="display: flex">
+                <mat-icon mat-list-icon>account_box</mat-icon>
+                <div mat-line>Id : {{player?.team?.id}}</div>
             </div>
         </mat-list-item>
         <mat-list-item role="listitem">
             <div style="display: flex">
                 <mat-icon mat-list-icon>account_box</mat-icon>
-                <div mat-line>Defense : {{stats?.defense}}</div>
+                <div mat-line>Nom équipe : {{player?.team?.name}}</div>
             </div>
         </mat-list-item>
     </mat-card-content>

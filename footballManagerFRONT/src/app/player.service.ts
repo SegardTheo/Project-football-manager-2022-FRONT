@@ -5,30 +5,32 @@ import {Observable, of} from 'rxjs';
 // const baseUrl = 'http://football-manager/movies';
 const baseUrl = 'http://football-manager/api/players';
 import { catchError, map, tap } from 'rxjs/operators';
-
-export interface PlayersListResponse {
-  items: Array<{
-    player: {
-      name: string;
-    }
-  }>;
-}
+import {Team} from "./team.service";
 
 export class Player {
+  id: number | undefined;
   name: string | undefined;
   description: string | undefined;
-  id: number | undefined;
-  stats: string | undefined;
+  strength: number | undefined;
+  physicalCondition: number | undefined;
+  defense: number | undefined;
+  team: Team | undefined;
 
   constructor(name: string | undefined,
               id: number | undefined,
               description: string | undefined,
-              stats: string | undefined
+              strength: number | undefined,
+              physicalCondition: number | undefined,
+              defense: number | undefined,
+              team: Team | undefined
   ) {
     this.name = name;
     this.id = id;
     this.description = description;
-    this.stats = stats;
+    this.strength = strength;
+    this.physicalCondition = physicalCondition;
+    this.defense = defense;
+    this.team = team;
   }
 }
 
@@ -63,7 +65,11 @@ export class PlayerService {
   }
 
   create(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
+    console.log(baseUrl);
+    console.log(data);
+    return this.http.post(baseUrl, data).pipe(
+        catchError(this.handleError<Player>('create' ))
+    );
   }
 
   update(id: any, data: any): Observable<Player> {
@@ -84,10 +90,5 @@ export class PlayerService {
     return this.http.get<Player>(`${baseUrl}/${id}`).pipe(
         catchError(this.handleError<Player>('findById' ))
     );
-  }
-
-
-  findByTitle(title: any): Observable<PlayersListResponse[]> {
-    return this.http.get<PlayersListResponse[]>(`${baseUrl}?title=${title}`);
   }
 }

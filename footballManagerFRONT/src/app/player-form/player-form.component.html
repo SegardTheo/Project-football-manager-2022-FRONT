@@ -2,10 +2,8 @@
     <mat-card-subtitle>world cup</mat-card-subtitle>
     <mat-card-title>Formulaire du joueur : {{ player?.name }}</mat-card-title>
     <form (submit)="submit()" [formGroup]="playerForm">
-
         <mat-card-content>
-            <div
-                    style="display: flex; flex-direction: column; justify-content: center">
+            <div style="display: flex; flex-direction: column; justify-content: center">
                 <mat-form-field appearance="legacy">
                     <mat-label>Nom joueur</mat-label>
                     <input formControlName="name" matInput placeholder="Nom">
@@ -39,6 +37,24 @@
                     <mat-label>Défense</mat-label>
                     <input type="number" formControlName="defense" matInput placeholder="92">
                     <mat-icon matSuffix>account_box</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Equipes</mat-label>
+                    <div *ngIf="selectedTeam" >
+                        <mat-select [(value)]="selectedTeam.id" formControlName="team">
+                            <mat-option *ngFor="let team of teamList" [value]="team.id">
+                                {{team.name}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                    <div *ngIf="!selectedTeam" >
+                        <mat-select formControlName="team">
+                            <mat-option *ngFor="let team of teamList" [value]="team.id">
+                                {{team.name}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
                 </mat-form-field>
                 <button mat-raised-button color="primary" type="submit">Enregistrer</button>
             </div>

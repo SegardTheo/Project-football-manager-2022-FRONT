@@ -3,6 +3,7 @@ import {Player, PlayerService} from "../player.service";
 import {ActivatedRoute} from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Stats, StatsService} from "../stats.service";
+import {Team, TeamService} from "../team.service";
 
 @Component({
   selector: 'app-player-form',
@@ -11,13 +12,14 @@ import {Stats, StatsService} from "../stats.service";
 })
 export class PlayerFormComponent implements OnInit {
   playerForm!: FormGroup ;
-  // statsForm!: FormGroup ;
-  player?: Player | null = null;
+  player: Player | null = null;
+  teamList?: Team[] | null = null;
   stats?: Stats | null = null;
   idPlayer : number | undefined;
+  selectedTeam: Team | null = null;
 
   constructor(private playerService: PlayerService,
-              private statsService: StatsService,
+              private teamService: TeamService,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder) { }
 
@@ -31,69 +33,74 @@ export class PlayerFormComponent implements OnInit {
       description: [null],
       strength: [null, [Validators.required]],
       physicalCondition: [null, [Validators.required]],
-      defense: [null, [Validators.required]]
+      defense: [null, [Validators.required]],
+      team: [null, [Validators.required]]
     });
-    // this.statsForm = this.formBuilder.group({
-    //   strength: [null, [Validators.required]],
-    //   physicalCondition: [null, [Validators.required]],
-    //   defense: [null, [Validators.required]]
-    // });
 
     if(this.idPlayer != null)
     {
-
       // @ts-ignore
       this.playerService.findById(this.idPlayer).subscribe((data)=>{
         this.player = data;
 
-        if(this.player?.stats != null)
-        {
-          // @ts-ignore
-          this.statsService.findByUrl(this.player?.stats).subscribe((data)=>{
-            this.stats = data;
-
-            this.playerForm.patchValue({
-              strength: this.stats?.strength,
-              physicalCondition: this.stats?.physicalCondition,
-              defense: this.stats?.defense
-            });
-          });
-        }
+        // @ts-ignore
+        this.selectedTeam = this.player.team;
 
         this.playerForm.patchValue({
           name: this.player?.name,
           description: this.player?.description,
+          strength: this.player?.strength,
+          physicalCondition: this.player?.physicalCondition,
+          defense: this.player?.defense,
+          team: this.player?.team
         });
       });
     }
+
+    // @ts-ignore
+    this.teamService.getAll().subscribe((data)=>{
+      this.teamList = data;
+    });
   }
 
   submit() {
     if (!this.playerForm?.valid ) {
+      alert('error');
       return;
     }
 
-    if(this.stats?.id != null)
-    {
-      // this.statsService.update(this.stats?.id, this.statsForm.value).subscribe((data)=>{
-      //   this.stats = data;
-      // });
-    } else {
-      // this.statsService.create(this.statsForm.value).subscribe((data)=>{
-      //   this.stats = data;
-      //
-      //   console.log(data);
-      //   console.log(this.stats);
-      // });
-    }
+    console.log( this.playerForm.value)
+
+    var name = this.playerForm.get("name")?.value;
+    var description = this.playerForm.get("description")?.value;
+    var strength = this.playerForm.get("strength")?.value;
+    var physicalCondition = this.playerForm.get("physicalCondition")?.value;
+    var defense = this.playerForm.get("defense")?.value;
+    var team = this.playerForm.get("team")?.value;
+
+    var playerJson =
+      {
+        "name": name,
+        "description": description,
+        "strength":strength,
+        "physicalCondition":physicalCondition,
+        "defense":defense,
+        "team":"/api/teams/" + team
+      };
 
     if(this.idPlayer != null)
     {
-      this.playerService.update(this.idPlayer, this.playerForm.value).subscribe((data)=>{
+      this.playerService.update(this.idPlayer, playerJson).subscribe((data)=>{
         this.player = data;
+
+        alert("OK");
       });
     } else {
-      this.playerService.create(this.playerForm.value);
+      this.playerService.create(playerJson).subscribe((data)=>{
+        this.player = data;
+
+        alert("OK");
+      });
     }
   }
 }

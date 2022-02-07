@@ -16,15 +16,23 @@ import { PlayerDetailsComponent } from './player-details/player-details.componen
 import { PlayerFormComponent } from './player-form/player-form.component';
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms"
+import {MatSelectModule} from "@angular/material/select";
+import { TeamFormComponent } from './team-form/team-form.component';
+import { ListTeamsComponent } from './list-teams/list-teams.component';
 
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
     ListPlayersComponent,
     PlayerDetailsComponent,
-    PlayerFormComponent
+    PlayerFormComponent,
+    TeamFormComponent,
+    ListTeamsComponent
   ],
   imports: [
+    MatSelectModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -44,4 +52,5 @@ import {ReactiveFormsModule} from "@angular/forms"
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
