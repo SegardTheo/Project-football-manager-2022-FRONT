@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="mat-card-primary">
     <mat-card-subtitle>world cup</mat-card-subtitle>
     <mat-card-title>Formulaire du joueur : {{ player?.name }}</mat-card-title>
     <form (submit)="submit()" [formGroup]="playerForm">
@@ -59,11 +59,5 @@
                 <button mat-raised-button color="primary" type="submit">Enregistrer</button>
             </div>
         </mat-card-content>
-
     </form>
-    <mat-divider inset></mat-divider>
-    <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-    </mat-card-actions>
 </mat-card>

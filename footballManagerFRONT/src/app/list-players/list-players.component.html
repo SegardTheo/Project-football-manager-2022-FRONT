@@ -1,4 +1,4 @@
-<mat-card style="background: #d6eff4;">
+<mat-card class="mat-card-primary">
     <div style="display: flex;justify-content: space-between;">
         <mat-card-subtitle>world cup</mat-card-subtitle>
         <a href="/playerForm">
@@ -14,13 +14,8 @@
                         <div mat-line>{{player.name}}</div>
                     </mat-list-item>
                 </a>
-                <a href="/playerForm?id={{player.id}}">modifier</a>
+                <a mat-raised-button href="/playerForm?id={{player.id}}">modifier</a>
             </div>
         </mat-list>
     </mat-card-content>
-    <mat-divider inset></mat-divider>
-    <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-    </mat-card-actions>
 </mat-card>

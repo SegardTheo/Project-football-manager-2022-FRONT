@@ -1,0 +1,61 @@
+<h2>Composition :</h2>
+<div style="display: flex;">
+    <mat-card class="mat-card-primary" style="margin-right: 1rem;">
+        <div style="display: flex;justify-content: space-between;">
+            <mat-card-subtitle>world cup</mat-card-subtitle>
+        </div>
+        <mat-card-title>1ère équipe</mat-card-title>
+        <mat-card-content>
+            <mat-list role="list" *ngFor="let player of match?.firstTeam?.team">
+                <div style="display: flex; justify-content: flex-start; align-items: center;">
+                    <a href="/playerDetails?id={{player.id}}">
+                        <mat-list-item role="listitem">
+                            <mat-icon mat-list-icon>account_box</mat-icon>
+                            <div mat-line>{{player.name}}</div>
+                        </mat-list-item>
+                    </a>
+                </div>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="mat-card-primary" style="margin-left: 1rem;">
+        <div style="display: flex;justify-content: space-between;">
+            <mat-card-subtitle>world cup</mat-card-subtitle>
+        </div>
+        <mat-card-title>2ème équipe</mat-card-title>
+        <mat-card-content>
+            <mat-list role="list" *ngFor="let player of match?.secondTeam?.team">
+                <div style="display: flex; justify-content: flex-start; align-items: center;">
+                    <a href="/playerDetails?id={{player.id}}">
+                        <mat-list-item role="listitem">
+                            <mat-icon mat-list-icon>account_box</mat-icon>
+                            <div mat-line>{{player.name}}</div>
+                        </mat-list-item>
+                    </a>
+                </div>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<mat-card class="mat-card-primary" style="margin-top: 2rem;">
+    <h2>SCORE :</h2>
+
+    <div style="display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: center;
+    justify-content: center;">
+            <p>1ère équipe : </p>
+            <mat-card style="margin: 1rem;
+    padding: 1rem;
+    font-size: 2rem;">{{ match?.firstTeam?.score }}</mat-card>
+        </div>
+
+        <div style="display: flex; align-items: center;
+    justify-content: center;">
+            <p>2ème équipe : </p>
+            <mat-card style="    margin: 1rem;
+    padding: 1rem;
+    font-size: 2rem;">{{ match?.secondTeam?.score }}</mat-card>
+        </div>
+    </div>
+</mat-card>

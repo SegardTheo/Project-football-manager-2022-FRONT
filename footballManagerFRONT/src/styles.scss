@@ -12,3 +12,40 @@ a {
    background: #c3dfe5;
   }
 }
+
+.mat-card-primary {
+  background: #d9eef3;
+}
+
+app-teams-players-management, app-home {
+  width: 100%;
+}
+
+.menu-nav {
+  margin-left: 3rem;
+
+  button {
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+}
+
+.home-parent {
+  display: flex;
+  flex-direction: column;
+
+  div {
+    width: 100%;
+    margin: 1rem;
+    display: flex;
+
+    mat-card {
+      width: 45%;
+    }
+
+    &:nth-child(2n) {
+      justify-content: flex-end;
+    }
+  }
+}

@@ -19,6 +19,11 @@ import {ReactiveFormsModule} from "@angular/forms"
 import {MatSelectModule} from "@angular/material/select";
 import { TeamFormComponent } from './team-form/team-form.component';
 import { ListTeamsComponent } from './list-teams/list-teams.component';
+import { RandomMatchComponent } from './random-match/random-match.component';
+import { TeamsPlayersManagementComponent } from './teams-players-management/teams-players-management.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { HomeComponent } from './home/home.component';
 
 // @ts-ignore
 // @ts-ignore
@@ -29,9 +34,14 @@ import { ListTeamsComponent } from './list-teams/list-teams.component';
     PlayerDetailsComponent,
     PlayerFormComponent,
     TeamFormComponent,
-    ListTeamsComponent
+    ListTeamsComponent,
+    RandomMatchComponent,
+    TeamsPlayersManagementComponent,
+    HomeComponent
   ],
   imports: [
+    MatToolbarModule,
+    MatTableModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatFormFieldModule,

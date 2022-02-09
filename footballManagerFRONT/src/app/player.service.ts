@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 
 // const baseUrl = 'http://football-manager/movies';
 const baseUrl = 'http://football-manager/api/players';
+
 import { catchError, map, tap } from 'rxjs/operators';
 import {Team} from "./team.service";
 
@@ -59,14 +60,12 @@ export class PlayerService {
   }
 
   getAll(): Observable<Player[]> | undefined {
-    return this.http.get<Player[]>(`${baseUrl}?page=1`).pipe(
+    return this.http.get<Player[]>(baseUrl).pipe(
         catchError(this.handleError<Player[]>('getAll', []))
     );
   }
 
   create(data: any): Observable<any> {
-    console.log(baseUrl);
-    console.log(data);
     return this.http.post(baseUrl, data).pipe(
         catchError(this.handleError<Player>('create' ))
     );
